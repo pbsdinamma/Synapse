@@ -6,8 +6,8 @@ from session_manager import init_session_state # Import to access session state
 
 def display_header():
     """Renders the main title and introductory markdown."""
-    st.set_page_config(page_title="AI Agent Chatbot", layout="wide") # Set page config here
-    st.title("🤖 AI Agent Chatbot")
+    st.set_page_config(page_title="Synapse", layout="wide") # Set page config here
+    st.title("🧠 Synapse")
     st.markdown("Ask me anything! I can answer questions using my internal knowledge (RAG) or by searching the web.")
     st.markdown("---")
 

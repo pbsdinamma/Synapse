@@ -1,4 +1,4 @@
-# 🤖 Smart AI Agent: RAG, Web Search & LangGraph
+# 🧠 Synapse: RAG, Web Search & LangGraph
 
 
 
@@ -41,7 +41,7 @@ This repository contains the code for a sophisticated AI Agent application capab
 ## 📦 Core Modules Structure
 
 ```
-agentBot/
+Synapse/
 ├── frontend/
 │   ├── app.py                  # Streamlit entry point
 │   ├── ui_components.py       # Chat UI, toggle, trace
@@ -92,7 +92,7 @@ agentBot/
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/agentBot.git
+git clone https://github.com/pbsdinamma/Synapse.git
 cd rag_agent_app
 uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
@@ -191,4 +191,4 @@ streamlit run frontend/app.py
 
 Feel free to open issues or PRs for suggestions, bugs, or enhancements.
 
-> Built with ❤️ using LangGraph, LangChain, Groq, and Streamlit
+> Synapse — Built with ❤️ using LangGraph, LangChain, Groq, and Streamlit
