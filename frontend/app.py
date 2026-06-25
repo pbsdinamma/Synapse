@@ -1,6 +1,8 @@
 # rag_agent_app/frontend/app.py
 
 import streamlit as st
+import requests
+import json
 from config import FRONTEND_CONFIG
 from session_manager import init_session_state
 from ui_components import (

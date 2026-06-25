@@ -7,7 +7,7 @@ from langchain_huggingface import HuggingFaceEmbeddings # Changed to HuggingFace
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Import API keys from config (only Pinecone is needed here now)
-from config import PINECONE_API_KEY
+from config import PINECONE_API_KEY, PINECONE_INDEX_NAME
 
 # Set environment variables for Pinecone
 os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
@@ -21,8 +21,8 @@ pc = Pinecone(api_key=PINECONE_API_KEY)
 # which has a dimension of 384.
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-# Define Pinecone index name
-INDEX_NAME = "langgraph-rag-index" # Make sure this matches your actual index name
+# Define Pinecone index name (reads from .env -> PINECONE_INDEX_NAME, defaults to "rag-index")
+INDEX_NAME = PINECONE_INDEX_NAME
 
 # --- Retriever (Existing function) ---
 def get_retriever():

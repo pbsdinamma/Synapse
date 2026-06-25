@@ -19,17 +19,36 @@ def render_document_upload_section(fastapi_base_url: str):
     st.header("Upload Document to Knowledge Base")
     with st.expander("Upload New Document (PDF Only)"):
         uploaded_file = st.file_uploader("Choose a PDF file", type="pdf", key="pdf_uploader")
-        
+
+        # Clear previous upload status when a new file is chosen
+        if uploaded_file is not None and st.session_state.get("last_uploaded_name") != uploaded_file.name:
+            st.session_state.upload_status = None
+            st.session_state.last_uploaded_name = uploaded_file.name
+
         if st.button("Upload PDF", key="upload_pdf_button"):
             if uploaded_file is not None:
-                with st.spinner(f"Uploading {uploaded_file.name}..."):
+                with st.spinner(f"Uploading and indexing {uploaded_file.name}... this may take a moment."):
                     try:
                         upload_data = upload_document_to_backend(fastapi_base_url, uploaded_file)
-                        st.success(f"PDF '{upload_data.get('filename')}' uploaded successfully! Processed {upload_data.get('processed_chunks')} pages.")
+                        st.session_state.upload_status = {
+                            "type": "success",
+                            "message": f"✅ '{upload_data.get('filename')}' indexed successfully! ({upload_data.get('processed_chunks')} pages processed)"
+                        }
                     except Exception as e:
-                        st.error(f"An error occurred during upload: {e}")
+                        st.session_state.upload_status = {
+                            "type": "error",
+                            "message": f"Upload failed: {e}"
+                        }
             else:
-                st.warning("Please upload a PDF file before clicking 'Upload PDF'.")
+                st.warning("Please select a PDF file before clicking 'Upload PDF'.")
+
+        # Show persistent status message after rerun
+        if st.session_state.get("upload_status"):
+            status = st.session_state.upload_status
+            if status["type"] == "success":
+                st.success(status["message"])
+            else:
+                st.error(status["message"])
     st.markdown("---")
 
 def render_agent_settings_section():

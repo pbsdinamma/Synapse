@@ -21,3 +21,7 @@ def init_session_state():
     # Initialize the web search enabled flag, defaulting to True
     if "web_search_enabled" not in st.session_state:
         st.session_state.web_search_enabled = True
+
+    # Initialize upload status to show persistent feedback after rerun
+    if "upload_status" not in st.session_state:
+        st.session_state.upload_status = None  # None | {"type": "success"|"error", "message": str}
